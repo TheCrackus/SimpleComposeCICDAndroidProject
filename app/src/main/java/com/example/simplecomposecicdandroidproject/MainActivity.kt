@@ -21,6 +21,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.simplecomposecicdandroidproject.ui.theme.SimpleComposeCICDAndroidProjectTheme
+import com.google.firebase.Firebase
+import com.google.firebase.analytics.FirebaseAnalytics
+import com.google.firebase.analytics.analytics
+import com.google.firebase.analytics.logEvent
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,7 +49,8 @@ fun MainContainer(modifier: Modifier = Modifier) {
         modifier = modifier.fillMaxSize()
     ) {
         Column(
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier
+                .fillMaxWidth()
                 .wrapContentHeight(),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
@@ -61,8 +66,18 @@ fun MainContainer(modifier: Modifier = Modifier) {
             )
 
             Button(
-                onClick = { }
-            ) { }
+                onClick = {
+                    Firebase.analytics.logEvent(
+                        FirebaseAnalytics.Event.SELECT_ITEM
+                    ) {
+                        param(FirebaseAnalytics.Param.ITEM_NAME, "Random Item Name")
+                    }
+                }
+            ) {
+                Text(
+                    text = "Firebase event button"
+                )
+            }
         }
     }
 }
