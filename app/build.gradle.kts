@@ -8,6 +8,7 @@ plugins {
 
     // Crashlytics
     alias(libs.plugins.crashlytics)
+    id("jacoco")
 }
 
 android {
@@ -73,4 +74,54 @@ dependencies {
 
     debugImplementation(libs.androidx.compose.ui.tooling)
     debugImplementation(libs.androidx.compose.ui.test.manifest)
+}
+
+jacoco {
+    toolVersion = "0.8.12"
+}
+
+tasks.withType<Test>().configureEach {
+    extensions.configure(JacocoTaskExtension::class.java) {
+        isIncludeNoLocationClasses = true
+        excludes = listOf("jdk.internal.*")
+    }
+}
+
+tasks.register<JacocoReport>("jacocoTestReport") {
+    dependsOn("testDebugUnitTest")
+
+    reports {
+        xml.required.set(true)
+        html.required.set(true)
+    }
+
+    val fileFilter = listOf(
+        "**/R.class", "**/R$*.class",
+        "**/BuildConfig.*",
+        "**/Manifest*.*",
+        "**/*Test*.*",
+        "**/android/**/*.*"
+    )
+
+    val buildDirPath = layout.buildDirectory.asFile.get().path
+
+    val debugTree = fileTree(
+        "$buildDirPath/intermediates/javac/debug/classes"
+    ) {
+        exclude(fileFilter)
+    }
+    val kotlinTree = fileTree(
+        "$buildDirPath/tmp/kotlin-classes/debug"
+    ) {
+        exclude(fileFilter)
+    }
+
+    classDirectories.setFrom(files(debugTree, kotlinTree))
+    sourceDirectories.setFrom(files("src/main/java", "src/main/kotlin"))
+    executionData.setFrom(fileTree(layout.buildDirectory.asFile.get()) {
+        include(
+            "jacoco/testDebugUnitTest.exec",
+            "outputs/unit_test_code_coverage/debugUnitTest/testDebugUnitTest.exec"
+        )
+    })
 }
