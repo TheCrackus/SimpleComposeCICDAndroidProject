@@ -33,19 +33,9 @@ jobs:
       - name: Assemble
         run: ./gradlew assemble --stacktrace
 
-      - name: Upload unit test reports
-        if: always()
-        uses: actions/upload-artifact@v4
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v5
         with:
-          name: unit-test-reports
-          path: |
-            **/build/test-results/test**/
-            **/build/reports/tests/**
-
-      - name: Upload JaCoCo report
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: jacoco-unit-report
-          path: |
-            **/build/reports/jacoco/**
+          token: ${{ secrets.CODECOV_TOKEN }}
+          files: app/build/reports/jacoco/jacocoTestReport/jacocoTestReport.xml
+          fail_ci_if_error: true
