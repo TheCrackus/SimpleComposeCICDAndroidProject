@@ -130,7 +130,7 @@ tasks.register<JacocoReport>("jacocoTestReport") {
 }
 
 firebaseAppDistribution {
-    appId = "1:251883887219:android:c728878f742455d85c2806"
+    appId = "1:251883887219:android:0cb177c78604a1525c2806"
     groups = "dev-testers"
     releaseNotes = "Dev build from GitHub Actions"
     serviceCredentialsFile = System.getenv("FIREBASE_SERVICE_ACCOUNT_FILE")
