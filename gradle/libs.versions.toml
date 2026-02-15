@@ -11,6 +11,7 @@ composeBom = "2024.09.00"
 google-services = "4.4.4"
 firebaseBom = "34.8.0"
 crashlytics = "3.0.6"
+firebaseAppDistribution = "5.2.1"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -37,3 +38,4 @@ kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 google-services = { id = "com.google.gms.google-services", version.ref = "google-services" }
 crashlytics = { id = "com.google.firebase.crashlytics", version.ref = "crashlytics" }
+appdistribution = { id = "com.google.firebase.appdistribution", version.ref = "firebaseAppDistribution" }

@@ -9,4 +9,7 @@ plugins {
 
     // Crashlytics
     alias(libs.plugins.crashlytics) apply false
+
+    // App distributions
+    alias(libs.plugins.appdistribution) apply false
 }
