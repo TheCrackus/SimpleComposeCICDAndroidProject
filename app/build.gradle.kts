@@ -9,6 +9,9 @@ plugins {
     // Crashlytics
     alias(libs.plugins.crashlytics)
     id("jacoco")
+
+    // App distributions
+    alias(libs.plugins.appdistribution)
 }
 
 android {
@@ -124,4 +127,11 @@ tasks.register<JacocoReport>("jacocoTestReport") {
             "outputs/unit_test_code_coverage/debugUnitTest/testDebugUnitTest.exec"
         )
     })
+}
+
+firebaseAppDistribution {
+    appId = "1:251883887219:android:c728878f742455d85c2806"
+    groups = "dev-testers"
+    releaseNotes = "Dev build from GitHub Actions"
+    serviceCredentialsFile = System.getenv("FIREBASE_SERVICE_ACCOUNT_FILE")
 }
