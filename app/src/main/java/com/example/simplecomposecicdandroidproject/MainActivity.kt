@@ -55,7 +55,7 @@ fun MainContainer(modifier: Modifier = Modifier) {
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
-                text = "Hi, this is CI/CD app"
+                text = "Hi, this is CI/CD app, now in master!"
             )
 
             Spacer(
