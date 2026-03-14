@@ -75,7 +75,7 @@ fun MainContainer(modifier: Modifier = Modifier) {
                 }
             ) {
                 Text(
-                    text = "Firebase event button"
+                    text = "Firebase event button!"
                 )
             }
         }
